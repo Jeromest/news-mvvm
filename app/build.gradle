@@ -16,6 +16,12 @@ android {
         versionName "1.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
 
     buildTypes {
@@ -48,8 +54,8 @@ dependencies {
     testImplementation "androidx.room:room-testing:$room_version"
 
     // 导航,用于底部导航栏
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.2'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.2'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.0-alpha01'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.0-alpha01'
     // 圆角矩形图片
     implementation "com.makeramen:roundedimageview:2.3.0"
     // 圆形图片

@@ -2,52 +2,43 @@ package com.hjzf.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hjzf.R
 import com.hjzf.databinding.ActivityMainBinding
 import com.hjzf.util.LogUtil
-import com.hjzf.util.setupWithNavController
 
 class MainActivity : AppCompatActivity() {
 
-    private var currentNavController: LiveData<NavController>? = null
 
     private lateinit var binding: ActivityMainBinding
+
+    private lateinit var currentNavController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         LogUtil.e(TAG, "onCreate: ")
         super.onCreate(savedInstanceState)
+        // View binding
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        if (savedInstanceState == null) {
-            setupBottomNavigationBar()
-        }
-        // if savedInstanceState != null 则由onRestoreInstanceState方法恢复页面的状态
-    }
 
-    // onRestoreInstanceState(Bundle savedInstanceState)只有在activity确实是被系统回收，重新创建activity的情况下才会被调用
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        LogUtil.e(TAG, "onRestoreInstanceState: ")
-        super.onRestoreInstanceState(savedInstanceState)
-        setupBottomNavigationBar()
+        // Init "currentNavController"
+        val navHostFragment = supportFragmentManager.findFragmentById(
+            R.id.nav_host_container
+        ) as NavHostFragment
+        currentNavController = navHostFragment.navController
+
+        // Setup the bottom navigation view with navController
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
+        bottomNavigationView.setupWithNavController(currentNavController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
         LogUtil.e(TAG, "onSupportNavigateUp: ")
-        return currentNavController?.value?.navigateUp() ?: false
-    }
-
-    private fun setupBottomNavigationBar() {
-        val navGraphIds = listOf(R.navigation.home, R.navigation.video, R.navigation.user)
-        val controller = binding.bottomNavigationView.setupWithNavController(
-            navGraphIds = navGraphIds,
-            fragmentManager = supportFragmentManager,
-            containerId = R.id.nav_host_container,
-            intent = intent
-        )
-        currentNavController = controller
+        return currentNavController.navigateUp()
     }
 
     companion object {

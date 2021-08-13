@@ -20,7 +20,7 @@ object Repository {
             // 调用网络数据源
             try {
                 val category = NewsApplication.newsTypeChineseName[type] ?: error("")
-                LogUtil.e("xx", "发送网络请求：$category $from,$count")
+                LogUtil.e(TAG, "发送网络请求：$category $from,$count")
                 val newsResponse = NewsNetwork.searchNews(type) // 耗时操作
                 when (newsResponse.error_code) {
                     0 -> {
@@ -52,7 +52,7 @@ object Repository {
             // 调用本地数据源
             try {
                 val category = NewsApplication.newsTypeChineseName[type] ?: error("")
-                LogUtil.e("xx", "访问数据库：$category $from,$count")
+                LogUtil.e(TAG, "访问数据库：$category $from,$count")
                 val newsDao = AppDatabase.getInstance().newsDao()
                 val newsList = newsDao.getNewsByCategory(category, from, count)
                 Result.success(newsList)
@@ -68,7 +68,7 @@ object Repository {
         return withContext(Dispatchers.IO) {
             try {
                 val category = NewsApplication.newsTypeChineseName[type] ?: error("")
-                LogUtil.e("xx", "查询log：$category")
+                LogUtil.e(TAG, "查询log：$category")
                 val logDao = AppDatabase.getInstance().logDao()
                 val todayLogs = logDao.getTodayLogsByCategory(category)
                 Result.success(todayLogs)
@@ -78,5 +78,7 @@ object Repository {
             }
         }
     }
+
+    const val TAG = "Repository"
 
 }

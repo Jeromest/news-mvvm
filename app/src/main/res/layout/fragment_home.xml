@@ -76,12 +76,12 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <!-- app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" 与标题栏构成联动效果-->
-    <com.hjzf.ui.news.NewsViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/news_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-    </com.hjzf.ui.news.NewsViewPager>
+    </androidx.viewpager2.widget.ViewPager2>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

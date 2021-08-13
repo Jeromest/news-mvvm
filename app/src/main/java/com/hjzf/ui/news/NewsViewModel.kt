@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hjzf.logic.Repository
 import com.hjzf.logic.model.News
+import com.hjzf.ui.news.NewsFragment.Companion.TAG
 import com.hjzf.util.LogUtil
 import com.hjzf.util.isNetworkAvailable
 import kotlinx.coroutines.delay
@@ -41,7 +42,7 @@ class NewsViewModel : ViewModel() {
     }
 
     fun loadNetWorkData() {
-        LogUtil.e("xx", "loadNetWorkData")
+        LogUtil.e(TAG, "loadNetWorkData")
         if (isLoading) return
         isLoading = true
         viewModelScope.launch {
@@ -51,7 +52,7 @@ class NewsViewModel : ViewModel() {
     }
 
     fun loadCacheData() {
-        LogUtil.e("xx", "loadCacheData")
+        LogUtil.e(TAG, "loadCacheData")
         if (isLoading) return
         isLoading = true
         viewModelScope.launch {

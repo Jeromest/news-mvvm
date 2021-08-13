@@ -167,7 +167,7 @@ class NewsAdapter(private val viewModel: NewsViewModel) :
     object DiffCallback : DiffUtil.ItemCallback<News>() {
         // 假设新闻标题各不重复,只要标题不同，就认定为不同的新闻
         override fun areItemsTheSame(oldItem: News, newItem: News): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.title == newItem.title
         }
 
         override fun areContentsTheSame(oldItem: News, newItem: News): Boolean {

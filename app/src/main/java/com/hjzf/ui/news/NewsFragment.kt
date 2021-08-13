@@ -15,6 +15,7 @@ import com.hjzf.util.showToast
 class NewsFragment : Fragment() {
 
     companion object {
+        const val TAG = "NewsFragment"
         private const val ARG_NEWS_TYPE = "news_type"
 
         /**
@@ -49,8 +50,8 @@ class NewsFragment : Fragment() {
         _binding = null
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel.apply {
             setNewsType(arguments?.getString(ARG_NEWS_TYPE) ?: "")
         }
@@ -94,10 +95,11 @@ class NewsFragment : Fragment() {
         }
         viewModel.message.observe(viewLifecycleOwner) {
             if (!it.isNullOrBlank()) {
-                // 防止把空白字符串也弹出来影响用户体验
+                // 防止把空白字符串弹出来影响用户体验
                 it.showToast()
                 viewModel.setMessage("")
             }
         }
     }
+
 }

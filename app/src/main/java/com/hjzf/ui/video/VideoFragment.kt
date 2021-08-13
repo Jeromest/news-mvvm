@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.hjzf.databinding.FragmentVideoBinding
 
 class VideoFragment : Fragment() {
 
-    private lateinit var viewModel: VideoViewModel
+    private val viewModel: VideoViewModel by viewModels()
 
     private var _binding: FragmentVideoBinding? = null
     private val binding get() = _binding!!
@@ -28,10 +29,8 @@ class VideoFragment : Fragment() {
         _binding = null
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(VideoViewModel::class.java)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         // TODO: Use the ViewModel
     }
-
 }
