@@ -26,7 +26,7 @@ sdk.dir=C\:\\Users\\ashini\\AppData\\Local\\Android\\Sdk
 | ------------------               | ViewModel + LiveData                |
 | ------------------               | Coroutines                          |
 | RecyclerView.Adapter             | ListAdapter                         |
-
+| TabLayout + ViewPager            | TabLayout + ViewPager2              |
 
 ## What will be added? 
 
