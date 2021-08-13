@@ -9,11 +9,11 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.app"
+        applicationId "com.hjzf"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
-        versionName "1.4"
+        versionName "1.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -43,9 +43,13 @@ android {
 }
 
 dependencies {
-    // 数据库相关
-    debugImplementation 'com.glance.guolindev:glance:1.0.0'
-    def room_version = "2.2.6"
+
+    // 数据库调试工具 Glance  https://github.com/guolindev/Glance.git   https://mvnrepository.com/artifact/com.guolindev.glance/glance
+    debugImplementation 'com.guolindev.glance:glance:1.0.0'
+    // 如果失败了，就改成  debugImplementation 'com.glance.guolindev:glance:1.0.0'
+
+    // 数据库访问框架 Room
+    def room_version = "2.4.0-alpha04"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     // optional - Kotlin Extensions and Coroutines support for Room
@@ -56,34 +60,42 @@ dependencies {
     // 导航,用于底部导航栏
     implementation 'androidx.navigation:navigation-fragment-ktx:2.4.0-alpha01'
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.0-alpha01'
+
     // 圆角矩形图片
     implementation "com.makeramen:roundedimageview:2.3.0"
+
     // 圆形图片
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
     // 加载图片 Glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     kapt 'com.github.bumptech.glide:compiler:4.12.0'
+
     // 下拉刷新
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
     // 表格 https://juejin.cn/post/6844903560665104391
     implementation 'com.github.huangyanbin:SmartTable:2.2.0'
+
     // 网络请求retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.6.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
+
     // 协程
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
-    // MVVM中的LiveData、viewmodel
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
+
+    // MVVM中的LiveData和ViewModel
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
 
     // base dependencies
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.3.0' // 核心UI库
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4' // 约束布局
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    testImplementation 'junit:junit:4.+'
+    testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
