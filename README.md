@@ -10,7 +10,7 @@
 #  Maybe need to add this file ：   local.properties   
 #  Location of the SDK. This is only used by Gradle.
 
-sdk.dir=C\:\\Users\\ashini\\AppData\\Local\\Android\\Sdk
+sdk.dir=C\:\\Users\\XXX\\AppData\\Local\\Android\\Sdk
 ```
 
 

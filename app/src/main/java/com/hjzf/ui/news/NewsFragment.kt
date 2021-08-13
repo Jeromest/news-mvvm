@@ -53,6 +53,7 @@ class NewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.apply {
+            // 设置当前页面对应的新闻类别
             setNewsType(arguments?.getString(ARG_NEWS_TYPE) ?: "")
         }
         val rv = binding.newsRecyclerView

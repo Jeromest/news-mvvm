@@ -81,6 +81,9 @@ class NewsViewModel : ViewModel() {
             val newData = result.getOrNull()!!
             if (newData.isNotEmpty()) {
                 _status.postValue(LOADING_STATUS)
+                // 只要发起了网络请求，就自动滑动到最顶部
+                shouldScrollToTop = true
+                // 更新页面的数据
                 _newsList.postValue(newData)
             } else {
                 _status.postValue(ERROR_STATUS)
@@ -105,8 +108,9 @@ class NewsViewModel : ViewModel() {
             if (newData.isNotEmpty()) {
                 _status.postValue(LOADING_STATUS)
                 val list = listOf(oldData, newData).flatten()
-                // 列表元素太少了,就自动滑动到最顶部
-                shouldScrollToTop = (list.size <= 12)
+                // 如果列表元素太少,就自动滑动到最顶部
+                shouldScrollToTop = (list.size <= 10)
+                // 更新页面的数据
                 _newsList.postValue(list)
             } else {
                 if (oldData.isNotEmpty()) {
