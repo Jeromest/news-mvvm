@@ -17,6 +17,10 @@ class NewsViewModel : ViewModel() {
     // 这个fragment展示的新闻类别：例如 "yule" "guoji" ...
     private var type: String = ""
 
+    // srl即SwipeRefreshLayout下拉刷新控件的状态, true表示圆圈在转动, false表示停止转动
+    private val _srlIsRefreshing = MutableLiveData<Boolean>()
+    val srlIsRefreshing: LiveData<Boolean> = _srlIsRefreshing
+
     // newsList：新闻列表中的数据
     private val _newsList = MutableLiveData<List<News>>().apply { value = ArrayList() }
     val newsList: LiveData<List<News>> = _newsList
@@ -29,9 +33,11 @@ class NewsViewModel : ViewModel() {
     private val _message = MutableLiveData<String>()
     val message: LiveData<String> = _message
 
+    // 是否需要滑动到最顶部
+    var shouldScrollToTop = true
+
     // 起到互斥锁的作用,防抖节流
     var isLoading = false
-    var shouldScrollToTop = true
 
     fun setNewsType(type: String) {
         this.type = type
@@ -45,6 +51,7 @@ class NewsViewModel : ViewModel() {
         LogUtil.e(TAG, "loadNetWorkData")
         if (isLoading) return
         isLoading = true
+        _srlIsRefreshing.value = true  // 让下拉刷新的圆圈转起来
         viewModelScope.launch {
             delay(700)                   // 这个延迟只是为了视觉效果，没有逻辑作用
             foo1()                                 // 具体的操作交给一个挂起函数执行

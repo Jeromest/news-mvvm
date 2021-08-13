@@ -11,7 +11,7 @@ class NewsApplication : Application() {
         lateinit var context: Context
 
         // 聚合数据 新闻头条API的口令
-        const val KEY = "6ba530bcea7f80a28980d1632179d568"
+        const val KEY = "2f56079ff3885f9dfeceafec6d7b1af7"
         val newsTypeChineseName = mapOf(
             "top" to "头条",
             "shehui" to "社会",

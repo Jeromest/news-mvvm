@@ -75,9 +75,8 @@ class NewsFragment : Fragment() {
         // 功能2:下拉刷新,用网络数据替换掉当前页面中的所有数据
         val srl = binding.newsSwipeRefreshLayout
         srl.setColorSchemeColors(Color.parseColor("#0288D1")) // 进度条的颜色
-        srl.setOnRefreshListener {
-            viewModel.loadNetWorkData()
-        }
+        viewModel.srlIsRefreshing.observe(viewLifecycleOwner) { srl.isRefreshing = it }
+        srl.setOnRefreshListener { viewModel.loadNetWorkData() }
 
         // 通过LiveData观察数据变化来刷新UI
         viewModel.status.observe(viewLifecycleOwner) {
@@ -86,12 +85,14 @@ class NewsFragment : Fragment() {
             newsAdapter.notifyItemChanged(newsAdapter.itemCount - 1)
         }
         viewModel.newsList.observe(viewLifecycleOwner) {
-            newsAdapter.submitList(it)
+            newsAdapter.submitList(it) {
+                // 更新完数据之后返回顶部
+                if (viewModel.shouldScrollToTop) {
+                    rv.scrollToPosition(0)
+                }
+            }
             srl.isRefreshing = false
             viewModel.isLoading = false// 加载完成
-            if (viewModel.shouldScrollToTop) {
-                rv.scrollToPosition(0)
-            }
         }
         viewModel.message.observe(viewLifecycleOwner) {
             if (!it.isNullOrBlank()) {
