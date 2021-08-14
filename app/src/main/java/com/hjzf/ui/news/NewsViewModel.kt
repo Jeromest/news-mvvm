@@ -39,6 +39,10 @@ class NewsViewModel : ViewModel() {
     // 起到互斥锁的作用,防抖节流
     var isLoading = false
 
+    fun setSrlRefreshing(value: Boolean) {
+        this._srlIsRefreshing.value = value
+    }
+
     fun setNewsType(type: String) {
         this.type = type
     }

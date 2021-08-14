@@ -86,14 +86,14 @@ class NewsFragment : Fragment() {
             newsAdapter.notifyItemChanged(newsAdapter.itemCount - 1)
         }
         viewModel.newsList.observe(viewLifecycleOwner) {
-            newsAdapter.submitList(it) {
-                // 更新完数据之后返回顶部
+            newsAdapter.submitList(it) { // commitCallback
                 if (viewModel.shouldScrollToTop) {
+                    // 页面数据刷新之后，自动回到顶部
                     rv.scrollToPosition(0)
                 }
             }
-            srl.isRefreshing = false
-            viewModel.isLoading = false// 加载完成
+            viewModel.setSrlRefreshing(false) // 让下拉刷新的圆圈停止转动并隐藏
+            viewModel.isLoading = false // 加载完成
         }
         viewModel.message.observe(viewLifecycleOwner) {
             if (!it.isNullOrBlank()) {
